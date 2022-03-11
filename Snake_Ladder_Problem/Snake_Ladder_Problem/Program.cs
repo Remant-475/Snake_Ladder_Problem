@@ -6,18 +6,39 @@ class program
 {
     static void Main(String[] args)
     {
-        Random random= new Random();
-        int Diceroll=random.Next(1,7);
-
-        int position=0;
+        Random random = new Random();
+        int Diceroll = random.Next(1, 7);
+        Console.WriteLine("Diceroll : " + Diceroll);
+        int position = 0;
         int Number_of_player = 1;
-        Console.WriteLine("Welcome to Snake and Ladder Game ");
-        Console.WriteLine("starting postion is : " + position);
-        Console.WriteLine("Number of Player : " + Number_of_player);
-        Console.WriteLine("Dice roll : " + Diceroll);
+
+        Random random1 = new Random();
+        int Checkoption = random1.Next(0, 3);
+
+        switch (Checkoption)
+        {
+            case 0:
+                position = position;
+                Console.WriteLine("player statyed at position " + position);
+
+                break;
+            case 1:
+                position = position + Diceroll;
+                Console.WriteLine("player moved to position " + position);
+                break;
+            case 2:
+
+
+                position = position - Diceroll;
+
+                Console.WriteLine("player back to position " + position);
+                break;
+
+        }
+
+
+
     }
 
 }
-
-
 

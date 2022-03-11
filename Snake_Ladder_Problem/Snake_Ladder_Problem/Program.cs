@@ -9,6 +9,7 @@ class SnakeandLadder
         Console.WriteLine("Welcome to snake Ladder Game");
 
         int position = 0;
+        int DiceCount = 0;
         while (position < 100)
         {
             Random random = new Random();
@@ -17,6 +18,8 @@ class SnakeandLadder
             {
                 position = 0;
             }
+
+            DiceCount++;
 
             Console.WriteLine("Diceroll : " + Diceroll);
 
@@ -45,15 +48,19 @@ class SnakeandLadder
                     Console.WriteLine("player back to position " + position);
                     break;
 
+
+
             }
 
 
 
-        }
 
+
+
+        }
+        Console.WriteLine("Total Count of DiceRoll :" + DiceCount);
     }
 }
-
 
 
 

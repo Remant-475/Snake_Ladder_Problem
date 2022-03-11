@@ -34,6 +34,10 @@ class SnakeandLadder
                     break;
                 case 1:
                     position = position + Diceroll;
+                    if (position > 100)
+                    {
+                        position = position - Diceroll;
+                    }
                     Console.WriteLine("player moved to position " + position);
                     break;
                 case 2:

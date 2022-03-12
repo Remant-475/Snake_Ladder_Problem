@@ -1,70 +1,95 @@
-﻿using System;
-
-namespace Snake_Ladder_Problem;
-
-class SnakeandLadder
+﻿namespace Snake_Ladder_Problem
 {
-    static void Main(String[] args)
+    class SnakeandLadder
     {
-        Console.WriteLine("Welcome to snake Ladder Game");
+        int Position = 0;
+        const int No_Play = 0;
+        const int Ladder= 1;
+        const int Snake_Bite = 2;
+        const int WinningPosition = 100;
 
-        int position = 0;
-        int DiceCount = 0;
-        while (position < 100)
+        static int DiceRoll()
         {
             Random random = new Random();
-            int Diceroll = random.Next(1, 7);
-            if (position < 0)
-            {
-                position = 0;
-            }
-
-            DiceCount++;
-
-            Console.WriteLine("Diceroll : " + Diceroll);
+            int Dice = random.Next(1, 7);
+            return Dice;
+        }
 
 
-
-            Random randomcheck = new Random();
-            int Checkoption = randomcheck.Next(0, 3);
+        public void PlayerMove(string player)
+        {
+            int RollDice = DiceRoll();
+            Random randomoption = new Random();
+            int Checkoption = randomoption.Next(0, 3);
+            
 
             switch (Checkoption)
             {
-                case 0:
-                    position = position;
-                    Console.WriteLine("player statyed at position " + position);
-
+                case No_Play:
+                    Position = Position;
                     break;
-                case 1:
-                    position = position + Diceroll;
-                    if (position > 100)
+
+                case Ladder:
+                    if (Position + RollDice > 100)
                     {
-                        position = position - Diceroll;
+                        Position = Position;
                     }
-                    Console.WriteLine("player moved to position " + position);
+                    else
+                    {
+                        Position += RollDice;
+                    }
                     break;
-                case 2:
-                    position = position - Diceroll;
-                    Console.WriteLine("player back to position " + position);
-                    break;
 
-
-
+                case Snake_Bite:
+                    Position -= RollDice;
+                    if (Position < 0)
+                    {
+                        Position = 0;
+                    }
+                     break;
             }
 
 
+        }
+
+        static void Main(string[] args)
+        {
 
 
+            SnakeandLadder Player1 = new SnakeandLadder();
+            SnakeandLadder Player2 = new SnakeandLadder();
 
+            Random randomturn = new Random();
+            int Player_Turn = randomturn.Next(0, 2);
+            
+
+            while ((Player1.Position <= WinningPosition) && (Player2.Position <= WinningPosition))
+            {
+                if (Player_Turn == 0)
+                {
+                    if (Player1.Position == WinningPosition)
+                    {
+                        Console.WriteLine("Player one is winner");
+                        break;
+                    }
+                    Player1.PlayerMove("Player 1");
+                    Player_Turn = 1;
+                    Console.WriteLine("Player 1 position " + Player1.Position);
+
+                }
+                else if (Player_Turn == 1)
+                {
+                    if (Player2.Position == WinningPosition)
+                    {
+                        Console.WriteLine("Player two is winner");
+                        break;
+                    }
+                    Player2.PlayerMove("Player 2");
+                    Player_Turn = 0;
+                    Console.WriteLine("Player 2 position " + Player2.Position);
+                }
+            }
 
         }
-        Console.WriteLine("Total Count of DiceRoll :" + DiceCount);
     }
 }
-
-
-
-
-
-
-
